@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Cores Zenith - Core */
+    --color-primary: 0 0% 6.3%; /* #101010 - cor principal, usada para backgrounds */
+    --color-secondary: 0 0% 94.5%; /* #F1F1F1 - branco/off-white para textos principais */
+    --color-text-rgb: 241, 241, 241; /* para uso com opacidade, ex: rgba(var(--color-text-rgb), 0.63) */
+    --color-text-raw: #F1F1F1A1; /* #F1F1F1 com 63% de opacidade - usar diretamente em CSS se necessário */
+    --color-gold: 45.8 21.2% 57.5%; /* #b5a472 - dourado principal para botões e UI */
+    --color-gold-light: 50 65.7% 81.2%; /* #F0DAAC - dourado claro para highlights */
+    --color-gold-dark: 46.3 25.5% 42%; /* #8a7b50 - dourado escuro para efeitos */
+    --color-success: 165 55.6% 65.3%; /* #76D7C4 - verde para indicação de sucesso */
+
+    /* Gradientes e Efeitos */
+    --color-gradient: linear-gradient(135deg, #F0DAAC 0%, #b5a472 100%);
+    --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.2);
+    --shadow-gold: 0 10px 25px rgba(240, 218, 172, 0.15);
+    --transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+    /* Variáveis de Shadcn/ui - Mapeado para o tema escuro da Zenith como padrão */
+    --background: var(--color-primary);   /* #101010 - preto para background */
+    --foreground: var(--color-secondary); /* #F1F1F1 - branco para texto */
+
+    --card: 0 0% 8%; /* #141414 - um pouco mais claro que o background */
+    --card-foreground: var(--color-secondary); /* #F1F1F1 */
+
+    --popover: 0 0% 8%; /* #141414 */
+    --popover-foreground: var(--color-secondary); /* #F1F1F1 */
+
+    --primary: var(--color-secondary); /* #F1F1F1 - branco para texto principal */
+    --primary-foreground: var(--color-primary); /* #101010 - preto */
+
+    /* Definindo um tom secundário */
+    --secondary: 0 0% 15%; /* #262626 */
+    --secondary-foreground: var(--color-secondary); /* #F1F1F1 */
+
+    --muted: 0 0% 15%; /* #262626 */
+    --muted-foreground: 0 0% 60%; /* #999999 - para texto suave */
+
+    --accent: 45.8 21.2% 57.5%; /* #b5a472 - dourado para acentos */
+    --accent-foreground: 0 0% 98%; /* #fafafa - para contraste sobre o dourado */
+
+    --destructive: 0 70% 50%; /* Vermelho para erros/alertas */
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 45.8 21.2% 57.5%; /* #b5a472 - bordas douradas */
+    --input: 0 0% 15%; /* #262626 */
+    --ring: 45.8 21.2% 57.5%; /* #b5a472 - dourado para focus rings */
+
+    --radius: 0.5rem;
+  }
+
+  /* Definição para tema claro - mantido para compatibilidade, mas não usado por padrão */
+  .light {
+    --background: 0 0% 98%; /* #fafafa - quase branco */
+    --foreground: var(--color-primary); /* #101010 - preto */
+
+    --card: 0 0% 100%; /* branco puro */
+    --card-foreground: var(--color-primary); /* #101010 */
+
+    --popover: 0 0% 100%; /* branco puro */
+    --popover-foreground: var(--color-primary); /* #101010 */
+
+    --primary: var(--color-primary); /* #101010 - preto */
+    --primary-foreground: 0 0% 98%; /* #fafafa - quase branco */
+
+    --secondary: 0 0% 96%; /* #f5f5f5 */
+    --secondary-foreground: var(--color-primary); /* #101010 */
+
+    --muted: 0 0% 96%; /* #f5f5f5 */
+    --muted-foreground: 0 0% 40%; /* #666666 - cinza escuro */
+
+    --accent: 45.8 21.2% 57.5%; /* #b5a472 - dourado */
+    --accent-foreground: 0 0% 98%; /* #fafafa */
+
+    --destructive: 0 84.2% 60.2%; /* vermelho */
+    --destructive-foreground: 0 0% 98%; /* #fafafa */
+
+    --border: 45.8 21.2% 57.5%; /* #b5a472 - dourado */
+    --input: 0 0% 90%; /* #e5e5e5 */
+    --ring: 45.8 21.2% 57.5%; /* #b5a472 - dourado */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  /* Aplicação de estilo ao body e textos */
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-primary, 'Montserrat', sans-serif);
+  }
+
+  /* Estilos para headings usando a fonte secundária */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-secondary, 'Poppins', sans-serif);
+  }
+
+  /* Estilização de botões padrão com cor dourada */
+  button, 
+  .btn {
+    @apply bg-zenith-gold text-zenith-primary transition-all;
+  }
+
+  /* Animações e transições suaves padrão */
+  a, button, .transition-default {
+    transition: var(--transition);
+  }
+} 
