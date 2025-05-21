@@ -87,7 +87,7 @@ const SolutionSection = () => {
         </svg>
       ),
       title: 'Adquirência própria',
-      description: 'Aprova até 25% mais transações, especialmente em nichos considerados "de risco"'
+      description: 'Aprova até 25% mais transações, especialmente em nichos considerados &quot;de risco&quot;'
     }
   ];
 
@@ -306,7 +306,7 @@ const SolutionSection = () => {
                     <>Escale suas campanhas <span className="font-semibold text-zenith-gold">exatamente quando</span> estão performando melhor</>
                   )}
                   {benefit.id === 4 && (
-                    <>Aprova <span className="font-semibold text-zenith-gold">até 25% mais transações</span>, especialmente em nichos considerados "de risco"</>
+                    <>Aprova <span className="font-semibold text-zenith-gold">até 25% mais transações</span>, especialmente em nichos considerados &quot;de risco&quot;</>
                   )}
                 </p>
               </div>
