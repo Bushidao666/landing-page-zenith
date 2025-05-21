@@ -16,10 +16,10 @@ Landing page de alta conversão desenvolvida para infoprodutores, utilizando Nex
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/zenith-landing.git
+git clone https://github.com/Bushidao666/landing-page-zenith.git
 
 # Entre na pasta do projeto
-cd zenith-landing
+cd landing-page-zenith
 
 # Instale as dependências
 npm install
