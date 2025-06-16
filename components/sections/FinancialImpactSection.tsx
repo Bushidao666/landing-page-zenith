@@ -69,9 +69,9 @@ const FinancialImpactSection = () => {
   
   // Valores para gráfico 
   const chartData = [
-    { label: 'Economia em Taxas', value: 'R$2.500/mês', height: 100, color: 'bg-gradient-to-t from-[#4299E1] to-[#4299E1]/20' },
-    { label: 'Melhor Aprovação', value: 'R$7.500/mês', height: 180, color: 'bg-gradient-to-t from-[#319795] to-[#319795]/20' },
-    { label: 'Crescimento', value: 'R$10.000/mês', height: 260, color: 'bg-gradient-to-t from-[#38A169] to-[#38A169]/20' }
+    { label: 'Economia em Taxas', value: 'R$2.500/mês', height: 96, color: 'bg-gradient-to-t from-[#4299E1] to-[#4299E1]/20' },
+    { label: 'Melhor Aprovação', value: 'R$7.500/mês', height: 173, color: 'bg-gradient-to-t from-[#319795] to-[#319795]/20' },
+    { label: 'Crescimento', value: 'R$10.000/mês', height: 240, color: 'bg-gradient-to-t from-[#38A169] to-[#38A169]/20' }
   ];
 
   return (
@@ -162,7 +162,7 @@ const FinancialImpactSection = () => {
             <h4 className="text-center text-xs sm:text-sm md:text-base text-zenith-text mb-2 md:mb-4">
               <span className="text-zenith-gold">Impacto Financeiro Mensal</span> para um negócio de R$50K/mês
             </h4>
-            <div className="h-80 sm:h-96 md:h-[28rem] flex items-end justify-evenly p-4 sm:p-6 pb-12 sm:pb-16 bg-black/60 backdrop-blur-sm rounded-xl border border-zenith-gold/20 shadow-gold relative">
+            <div className="h-[22rem] sm:h-96 md:h-[28rem] flex items-end justify-evenly p-4 sm:p-6 pb-12 sm:pb-16 bg-black/60 backdrop-blur-sm rounded-xl border border-zenith-gold/20 shadow-gold relative">
               {/* Linhas de grade horizontais com valores */}
               <div className="absolute inset-0 flex flex-col justify-between py-14 sm:py-16 px-3 sm:px-4 pointer-events-none">
                 <div className="w-full h-px bg-zenith-text/10 relative">
@@ -183,31 +183,31 @@ const FinancialImpactSection = () => {
               </div>
               
               {/* Legenda integrada ao gráfico - posicionada à esquerda mas sem sobrepor os valores do eixo Y */}
-              <div className="absolute left-16 sm:left-20 md:left-24 top-4 md:top-6 text-left p-2 md:p-3 bg-black/60 backdrop-blur-sm rounded-lg border border-zenith-gold/10 shadow-lg">
-                <h5 className="text-[10px] md:text-xs text-zenith-gold font-medium mb-2 uppercase tracking-wider">Legenda</h5>
+              <div className="hidden sm:block absolute left-10 sm:left-20 md:left-24 top-4 md:top-6 text-left p-1 sm:p-2 md:p-3 bg-black/60 backdrop-blur-sm rounded-lg border border-zenith-gold/10 shadow-lg z-20">
+                <h5 className="text-[9px] sm:text-[10px] md:text-xs text-zenith-gold font-medium mb-1 sm:mb-2 uppercase tracking-wider">Legenda</h5>
                 {chartData.map((item, index) => (
-                  <div key={index} className="flex items-center gap-2 mb-2">
+                  <div key={index} className="flex items-center gap-1 sm:gap-2 mb-1 sm:mb-2">
                     <div 
-                      className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${
+                      className={`w-2 h-2 sm:w-4 sm:h-4 rounded-full ${
                         index === 0 ? 'bg-[#4299E1]' : 
                         index === 1 ? 'bg-[#319795]' : 
                         'bg-[#38A169]'
                       }`}
                     ></div>
-                    <span className="text-[9px] sm:text-xs text-zenith-text">{item.label}: <span className="text-zenith-secondary font-medium">{item.value}</span></span>
+                    <span className="text-[8px] sm:text-xs text-zenith-text">{item.label}: <span className="text-zenith-secondary font-medium">{item.value}</span></span>
                   </div>
                 ))}
-                <p className="text-[8px] sm:text-xs text-zenith-text/70 mt-1 max-w-[120px] sm:max-w-[150px]">
+                <p className="text-[7px] sm:text-xs text-zenith-text/70 mt-1 max-w-[120px] sm:max-w-[150px]">
                   Percentuais indicam impacto no faturamento mensal
                 </p>
               </div>
               
               {/* Gráfico de barras animado com efeitos visuais - com barras 15% mais estreitas e maior espaçamento */}
-              <div className="flex items-end justify-center gap-8 md:gap-16 lg:gap-36 h-full w-[85%]">
+              <div className="flex items-end justify-center gap-8 md:gap-16 lg:gap-36 h-full w-full sm:w-[85%]">
                 {chartData.map((bar, index) => (
                   <div key={index} className="relative z-10">
                     <motion.div 
-                      className={`w-14 sm:w-16 md:w-20 lg:w-24 ${bar.color} rounded-t-lg relative group cursor-pointer overflow-hidden shadow-lg`}
+                      className={`w-12 sm:w-16 md:w-20 lg:w-24 ${bar.color} rounded-t-lg relative group cursor-pointer overflow-hidden shadow-lg`}
                       initial={{ height: 0 }}
                       whileInView={{ height: bar.height * 1.2 }}
                       viewport={{ once: true }}
@@ -224,7 +224,7 @@ const FinancialImpactSection = () => {
                       />
                       
                       {/* Valor monetário integrado à barra */}
-                      <div className="absolute inset-x-0 top-3 text-center text-xs sm:text-sm font-semibold text-white/90">
+                      <div className="absolute inset-x-0 top-3 text-center text-[10px] sm:text-sm font-semibold text-white/90">
                         {bar.value}
                       </div>
                       
@@ -238,11 +238,43 @@ const FinancialImpactSection = () => {
                     
                     {/* Rótulo abaixo da barra */}
                     <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-center w-24 sm:w-28">
-                      <p className="text-[10px] sm:text-xs text-zenith-text/90 font-medium">{bar.label}</p>
+                      <p className="text-[10px] sm:text-xs text-zenith-text/90 font-medium">
+                        {bar.label === 'Melhor Aprovação' ? (
+                          <>
+                            Melhor
+                            <br />
+                            Aprovação
+                          </>
+                        ) : (
+                          bar.label
+                        )}
+                      </p>
                     </div>
                   </div>
                 ))}
               </div>
+            </div>
+            
+            {/* Legenda para mobile */}
+            <div className="sm:hidden mt-6 w-full p-4 bg-black/60 backdrop-blur-sm rounded-xl border border-zenith-gold/20 shadow-gold">
+                <h5 className="text-xs text-zenith-gold font-medium mb-3 uppercase tracking-wider text-center">Legenda</h5>
+                <div className="space-y-2">
+                    {chartData.map((item, index) => (
+                        <div key={index} className="flex items-center gap-3 justify-center">
+                            <div
+                                className={`w-3 h-3 rounded-full ${
+                                    index === 0 ? 'bg-[#4299E1]' :
+                                    index === 1 ? 'bg-[#319795]' :
+                                    'bg-[#38A169]'
+                                }`}
+                            ></div>
+                            <span className="text-xs text-zenith-text">{item.label}: <span className="text-zenith-secondary font-medium">{item.value}</span></span>
+                        </div>
+                    ))}
+                </div>
+                <p className="text-[10px] text-zenith-text/70 mt-3 text-center max-w-xs mx-auto">
+                    Percentuais indicam impacto no faturamento mensal
+                </p>
             </div>
             
             {/* Resumo do impacto total - abaixo do gráfico - DESTACADO PARA MAIOR IMPACTO VISUAL */}

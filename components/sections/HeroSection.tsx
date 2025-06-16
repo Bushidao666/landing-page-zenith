@@ -136,7 +136,7 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
             >
-              O único gateway integrado ao banco digital que libera o valor das suas vendas <span className="text-zenith-gold font-semibold">instantaneamente</span>, cobra até <span className="text-zenith-gold font-semibold">60% menos</span> em taxas e aprova <span className="text-zenith-gold font-semibold">25% mais</span> transações.
+              O único gateway integrado com seu próprio banco digital que libera o valor das suas vendas <span className="text-zenith-gold font-semibold">instantaneamente</span>, cobra até <span className="text-zenith-gold font-semibold">60% menos</span> em taxas e aprova <span className="text-zenith-gold font-semibold">25% mais</span> transações.
             </motion.p>
             
             {/* CTA Button com destaque visual e gatilho de urgência */}
