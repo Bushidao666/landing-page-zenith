@@ -542,7 +542,7 @@ const ProblemSection = () => {
                     </span>
                   </p>
                   <p className="text-xl font-extrabold text-zenith-gold">
-                    É o modelo <span className="underline decoration-wavy decoration-red-500/70 underline-offset-4">predatório</span> dos gateways.
+                    É o modelo <span className="underline-offset-4">predatório</span> dos gateways.
                   </p>
                 </div>
               </GoldBanner>

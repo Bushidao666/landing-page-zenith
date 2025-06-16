@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useAnimation } from 'framer-motion';
 const CTASection = () => {
   // Estados aprimorados para controle preciso de interações
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const [isHovering, setIsHovering] = useState(false);
   const [hasPulsed, setHasPulsed] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -25,14 +26,29 @@ const CTASection = () => {
   }, [ctaAnimation, hasPulsed]);
 
   // Toggle video play/pause com feedback visual
-  const togglePlay = () => {
+  const togglePlay = async () => {
     if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
+      if (videoRef.current.paused) {
+        try {
+          await videoRef.current.play();
+          setIsPlaying(true);
+        } catch (error) {
+          console.error("Video play failed:", error);
+          setIsPlaying(false);
+        }
       } else {
-        videoRef.current.play().catch(e => console.error("Video play failed:", e));
+        videoRef.current.pause();
+        setIsPlaying(false);
       }
-      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (videoRef.current) {
+      const newMuted = !videoRef.current.muted;
+      videoRef.current.muted = newMuted;
+      setIsMuted(newMuted);
     }
   };
 
@@ -212,8 +228,10 @@ const CTASection = () => {
               poster="/video-thumbnail.jpg"
               onClick={togglePlay}
               playsInline
+              loop
+              muted
             >
-              <source src="/video.mp4" type="video/mp4" />
+              <source src="/videos/zenith-video.mp4" type="video/mp4" />
               Seu navegador não suporta vídeos HTML5.
             </video>
             
@@ -226,12 +244,31 @@ const CTASection = () => {
               Case de Sucesso
             </div>
             
-            {/* Badge de informação do vídeo mais informativa */}
-            <div className="absolute bottom-3 right-3 md:bottom-4 md:right-4 bg-black/60 backdrop-blur-sm px-3 py-1 md:px-4 md:py-1.5 rounded-full text-xs md:text-sm text-white/90 border border-white/10 z-10 flex items-center shadow-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-1.5 text-zenith-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span>03:45</span>
+            <div className="absolute bottom-3 right-3 md:bottom-4 md:right-4 flex items-center space-x-2 z-20">
+              {/* Badge de informação do vídeo mais informativa */}
+              <div className="bg-black/60 backdrop-blur-sm px-3 py-1 md:px-4 md:py-1.5 rounded-full text-xs md:text-sm text-white/90 border border-white/10 flex items-center shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-1.5 text-zenith-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>03:45</span>
+              </div>
+
+              {/* Botão de Mudo */}
+              <button
+                onClick={toggleMute}
+                className="p-2 rounded-full bg-black/60 backdrop-blur-sm text-white hover:bg-black/80 border border-white/10 transition-colors"
+                aria-label={isMuted ? 'Ativar som' : 'Desativar som'}
+              >
+                {isMuted ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M12 21V3l-6 6H4a2 2 0 00-2 2v4a2 2 0 002 2h2l6 6z" />
+                  </svg>
+                )}
+              </button>
             </div>
             
             {/* Play button - Implementação simplificada e limpa */}
