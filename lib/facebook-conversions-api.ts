@@ -64,7 +64,7 @@ function getFbclid(): string | undefined {
 
 // --- CONFIGURATION & STATE ---
 
-const API_BASE_URL = 'https://zenith-api-conversions-production.up.railway.app';
+const API_BASE_URL = 'https://zenithpay-facebook-api.up.railway.app';
 const CONFIG = {
   currency: 'BRL',
   debugMode: process.env.NODE_ENV === 'development', // Ativo em desenvolvimento
