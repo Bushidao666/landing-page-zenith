@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 
-const FAQSection = () => {
+interface FAQSectionProps {
+  onOpenModal?: () => void;
+}
+
+const FAQSection: React.FC<FAQSectionProps> = ({ onOpenModal }) => {
   // Referência para animação baseada no scroll
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: false, margin: "-10% 0px -10% 0px" });
@@ -322,6 +326,7 @@ const FAQSection = () => {
             
             {/* Botão com animação de hover */}
             <motion.button
+              onClick={onOpenModal}
               className="relative px-8 sm:px-10 py-4 sm:py-5 rounded-md bg-zenith-gradient font-bold text-zenith-primary text-base sm:text-lg tracking-wide shadow-gold overflow-hidden group"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}

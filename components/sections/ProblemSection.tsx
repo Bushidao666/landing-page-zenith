@@ -3,7 +3,12 @@ import { motion, Variants } from 'framer-motion';
 import GoldHeading from '../ui/GoldHeading';
 import GoldBanner from '../ui/GoldBanner';
 
-const ProblemSection = () => {
+interface ProblemSectionProps {
+  onScrollTo?: () => void;
+  onOpenModal?: () => void;
+}
+
+const ProblemSection: React.FC<ProblemSectionProps> = ({ onScrollTo, onOpenModal }) => {
   // Estado para controlar o ícone em hover
   const [hoveredIcon, setHoveredIcon] = useState<number | null>(null);
   
@@ -541,9 +546,12 @@ const ProblemSection = () => {
                       <span className="absolute bottom-0 left-0 right-0 h-[5px] bg-zenith-gold/20 -z-0"></span>
                     </span>
                   </p>
-                  <p className="text-xl font-extrabold text-zenith-gold">
-                    É o modelo <span className="underline-offset-4">predatório</span> dos gateways.
-                  </p>
+                  <button
+                    onClick={onScrollTo}
+                    className="text-xl font-extrabold text-zenith-gold underline-offset-4"
+                  >
+                    Conheça a Solução
+                  </button>
                 </div>
               </GoldBanner>
               

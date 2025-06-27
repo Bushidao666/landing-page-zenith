@@ -79,7 +79,12 @@ const ClockHands = () => {
   );
 };
 
-const HowItWorksSection = () => {
+interface HowItWorksSectionProps {
+  onScrollTo?: () => void;
+  onOpenModal?: () => void;
+}
+
+const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ onScrollTo, onOpenModal }) => {
   // Timeline de eventos
   const timeline = [
     {
@@ -515,20 +520,18 @@ const HowItWorksSection = () => {
         </div>
         
         {/* Call-to-action sutil */}
-        <motion.div
-          className="mt-24 text-center"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+        <div className="mt-12 text-center">
           <a 
-            href="#signup" 
+            href="#comparison" 
+            onClick={(e) => {
+              e.preventDefault();
+              onScrollTo?.();
+            }}
             className="inline-block px-8 py-3 bg-zenith-gold text-zenith-primary font-bold rounded-full hover:bg-zenith-gold/90 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-zenith-gold/20"
           >
-            Comece a receber em tempo real
+            Compare com o Mercado
           </a>
-        </motion.div>
+        </div>
       </div>
       
       {/* Elemento decorativo inferior aprimorado */}

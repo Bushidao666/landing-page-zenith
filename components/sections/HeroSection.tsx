@@ -3,7 +3,12 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import GoldButton from '../ui/GoldButton';
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onScrollTo?: () => void;
+  onOpenModal?: () => void;
+}
+
+const HeroSection: React.FC<HeroSectionProps> = ({ onScrollTo, onOpenModal }) => {
   // Animação das notificações no app do celular (feed interno)
   const notifications = [
     {
@@ -162,13 +167,14 @@ const HeroSection = () => {
                 ></motion.div>
                 <GoldButton 
                   size="lg"
+                  onClick={onScrollTo}
                   icon={
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   }
                 >
-                  QUERO DINHEIRO INSTANTÂNEO
+                  Veja como Funciona
                 </GoldButton>
               </div>
               

@@ -1,7 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const ComparisonSection = () => {
+interface ComparisonSectionProps {
+  onScrollTo?: () => void;
+  onOpenModal?: () => void;
+}
+
+const ComparisonSection: React.FC<ComparisonSectionProps> = ({ onScrollTo, onOpenModal }) => {
   // Dados da tabela comparativa com destaque visual nas diferenças
   const comparisonData = [
     {
@@ -408,6 +413,7 @@ const ComparisonSection = () => {
             
             <div className="relative z-10">
               <motion.button
+                onClick={onScrollTo}
                 className="relative w-full md:w-auto px-8 py-4 md:px-10 md:py-5 rounded-lg bg-zenith-gradient font-bold text-zenith-primary text-lg transition-all overflow-hidden group"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
@@ -416,7 +422,7 @@ const ComparisonSection = () => {
                 <span className="absolute inset-0 w-full h-full bg-gold-shimmer opacity-0 group-hover:opacity-100 animate-shimmer"></span>
                 
                 <span className="relative z-10 flex items-center justify-center">
-                  <span>QUERO DINHEIRO INSTANTÂNEO</span>
+                  <span>Veja o Impacto Real</span>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>

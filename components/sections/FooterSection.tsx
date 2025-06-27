@@ -47,7 +47,11 @@ const glowPulse = {
   }
 };
 
-const FooterSection = () => {
+interface FooterSectionProps {
+  onOpenModal?: () => void;
+}
+
+const FooterSection: React.FC<FooterSectionProps> = ({ onOpenModal }) => {
   const currentYear = new Date().getFullYear();
   
   return (
@@ -94,7 +98,10 @@ const FooterSection = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <button className="relative px-10 py-5 rounded-md bg-zenith-gradient font-bold text-zenith-primary text-lg transition-all shadow-gold group-hover:shadow-lg overflow-hidden">
+                <button 
+                  onClick={onOpenModal}
+                  className="relative px-10 py-5 rounded-md bg-zenith-gradient font-bold text-zenith-primary text-lg transition-all shadow-gold group-hover:shadow-lg overflow-hidden"
+                >
                   {/* Efeito de brilho no hover */}
                   <motion.span 
                     className="absolute inset-0 bg-white/20"

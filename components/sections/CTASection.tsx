@@ -1,7 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useAnimation } from 'framer-motion';
 
-const CTASection = () => {
+interface CTASectionProps {
+  onOpenModal?: () => void;
+}
+
+const CTASection: React.FC<CTASectionProps> = ({ onOpenModal }) => {
   // Estados aprimorados para controle preciso de interações
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
@@ -333,6 +337,7 @@ const CTASection = () => {
             </div>
             
             <motion.button
+              onClick={onOpenModal}
               className="group px-6 sm:px-8 md:px-10 py-4 sm:py-5 md:py-6 rounded-lg md:rounded-xl bg-gradient-to-r from-zenith-gold to-zenith-gold/90 font-bold text-zenith-primary text-lg sm:text-xl md:text-2xl transition-all relative overflow-hidden"
               whileHover={{ scale: 1.03, boxShadow: '0 0 30px rgba(240,218,172,0.3)' }}
               whileTap={{ scale: 0.98 }}

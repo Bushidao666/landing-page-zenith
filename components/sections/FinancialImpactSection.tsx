@@ -1,9 +1,29 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
+import { trackViewContent } from '@/lib/facebook-conversions-api';
+
+interface FinancialImpactSectionProps {
+  onOpenModal?: () => void;
+}
 
 // Componente otimizado com princípios de neuromarketing
-const FinancialImpactSection = () => {
+const FinancialImpactSection: React.FC<FinancialImpactSectionProps> = ({ onOpenModal }) => {
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.5 });
+  const [hasTracked, setHasTracked] = useState(false);
+
+  useEffect(() => {
+    if (isInView && !hasTracked) {
+      trackViewContent({
+        content_name: 'Análise de Impacto Financeiro',
+        content_category: 'Ferramenta de Vendas',
+        value: 240000, // R$240.000,00 anuais recuperados
+      });
+      setHasTracked(true);
+    }
+  }, [isInView, hasTracked]);
+
   // Dados do impacto financeiro com ícones mais sofisticados
   const financialImpact = [
     {
@@ -75,7 +95,7 @@ const FinancialImpactSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-b from-[#0c0c0c] to-zenith-primary relative overflow-hidden">
+    <section ref={sectionRef} className="py-24 bg-gradient-to-b from-[#0c0c0c] to-zenith-primary relative overflow-hidden">
       {/* Elementos decorativos de fundo aprimorados */}
       <div className="absolute top-0 left-0 w-full h-px bg-zenith-gold/20"></div>
       <div className="absolute -top-20 -left-20 w-96 h-96 rounded-full bg-zenith-gold/5 filter blur-[100px]"></div>
@@ -420,6 +440,7 @@ const FinancialImpactSection = () => {
               <div className="absolute -inset-2 rounded-md opacity-10 bg-zenith-gold/20 blur-md -z-10"></div>
               
               <motion.button
+                onClick={onOpenModal}
                 className="relative group px-8 sm:px-10 py-4 sm:py-5 rounded-md overflow-hidden font-bold text-base sm:text-lg md:text-xl shadow-gold transform transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}

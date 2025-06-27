@@ -9,8 +9,20 @@ import FinancialImpactSection from '@/components/sections/FinancialImpactSection
 import CTASection from '@/components/sections/CTASection';
 import FAQSection from '@/components/sections/FAQSection';
 import FooterSection from '@/components/sections/FooterSection';
+import ZenithFormModal from '@/components/ui/ZenithFormModal';
+import { useModal } from '../hooks/useModal';
+import { scrollTo } from '../lib/scrollTo';
 
 export default function HomePage() {
+  const { isOpen, openModal, closeModal } = useModal();
+
+  // Função para lidar com o envio do formulário
+  const handleFormSubmit = (data: any) => {
+    console.log('Dados do formulário:', data);
+    // Aqui você pode integrar com sua API/CRM
+    // Exemplo: enviar para webhook, CRM, banco de dados, etc.
+  };
+
   return (
     <>
       <Head>
@@ -58,15 +70,39 @@ export default function HomePage() {
           ))}
         </div>
         
-        <HeroSection />
-        <ProblemSection />
-        <SolutionSection />
-        <HowItWorksSection />
-        <ComparisonSection />
-        <FinancialImpactSection />
-        <CTASection />
-        <FAQSection />
-        <FooterSection />
+        <div id="hero">
+          <HeroSection onScrollTo={() => scrollTo('problem')} />
+        </div>
+        <div id="problem">
+          <ProblemSection onScrollTo={() => scrollTo('solution')} />
+        </div>
+        <div id="solution">
+          <SolutionSection onScrollTo={() => scrollTo('how-it-works')} />
+        </div>
+        <div id="how-it-works">
+          <HowItWorksSection onScrollTo={() => scrollTo('comparison')} />
+        </div>
+        <div id="comparison">
+          <ComparisonSection onScrollTo={() => scrollTo('financial-impact')} />
+        </div>
+        <div id="financial-impact">
+          <FinancialImpactSection onOpenModal={openModal} />
+        </div>
+        <div id="cta">
+          <CTASection onOpenModal={openModal} />
+        </div>
+        <div id="faq">
+          <FAQSection onOpenModal={openModal} />
+        </div>
+        <div id="footer">
+          <FooterSection onOpenModal={openModal} />
+        </div>
+        
+        <ZenithFormModal 
+          isOpen={isOpen}
+          onClose={closeModal}
+          onSubmit={handleFormSubmit}
+        />
       </main>
       
       {/* Estilos específicos para animações */}

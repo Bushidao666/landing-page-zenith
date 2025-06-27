@@ -1,7 +1,12 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useMotionValueEvent, useSpring, useAnimation } from 'framer-motion';
 
-const SolutionSection = () => {
+interface SolutionSectionProps {
+  onScrollTo?: () => void;
+  onOpenModal?: () => void;
+}
+
+const SolutionSection: React.FC<SolutionSectionProps> = ({ onScrollTo, onOpenModal }) => {
   // Refs para efeito de paralaxe
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
@@ -460,13 +465,14 @@ const SolutionSection = () => {
             transition={{ duration: 0.6, delay: 1.2 }}
           >
             <motion.button 
+              onClick={onScrollTo}
               className="group relative px-8 py-3 bg-zenith-gradient rounded-full text-zenith-primary font-semibold text-sm tracking-wide overflow-hidden"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
               <span className="relative z-10 flex items-center">
-                <span>QUERO SABER MAIS</span>
+                <span>Veja na Prática</span>
                 <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
