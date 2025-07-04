@@ -113,6 +113,15 @@ const ZenithFormModal: React.FC<ZenithFormModalProps> = ({
       // Envia o evento para a CAPI do Facebook primeiro
       await processAndTrackLead(data);
       
+      // Envia os dados para o webhook da Make.com
+      await fetch('https://hook.us1.make.com/44u98tk47uo9dktp4iqszwnktl4i4bt3', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
       // Simular envio para outro sistema/CRM (se houver)
       await new Promise(resolve => setTimeout(resolve, 1500));
       
