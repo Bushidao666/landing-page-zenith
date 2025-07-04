@@ -37,6 +37,41 @@ interface ZenithFormModalProps {
   onSubmit?: (data: FormData) => void;
 }
 
+// Função para enviar dados para o webhook
+const sendToWebhook = async (data: FormData) => {
+  const webhookUrl = 'https://hook.us1.make.com/44u98tk47uo9dktp4iqszwnktl4i4bt3';
+  
+  try {
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        nome_completo: data.nomeCompleto,
+        whatsapp: data.whatsapp,
+        email: data.email,
+        faturamento_mensal: data.faturamentoMensal,
+        principal_produto: data.principalProduto,
+        maior_dificuldade: data.maiorDificuldade,
+        timestamp: new Date().toISOString(),
+        origem: 'Zenith Landing Page'
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erro HTTP: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log('Dados enviados com sucesso para o webhook:', result);
+    return result;
+  } catch (error) {
+    console.error('Erro ao enviar dados para o webhook:', error);
+    throw error;
+  }
+};
+
 const ZenithFormModal: React.FC<ZenithFormModalProps> = ({
   isOpen,
   onClose,
@@ -110,20 +145,11 @@ const ZenithFormModal: React.FC<ZenithFormModalProps> = ({
     try {
       setIsSubmitting(true);
       
-      // Envia o evento para a CAPI do Facebook primeiro
+      // 1. Envia o evento para a CAPI do Facebook primeiro
       await processAndTrackLead(data);
       
-      // Envia os dados para o webhook da Make.com
-      await fetch('https://hook.us1.make.com/44u98tk47uo9dktp4iqszwnktl4i4bt3', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      // Simular envio para outro sistema/CRM (se houver)
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // 2. Envia os dados para o webhook
+      await sendToWebhook(data);
       
       setSubmitSuccess(true);
       if (onSubmit) {
@@ -140,6 +166,9 @@ const ZenithFormModal: React.FC<ZenithFormModalProps> = ({
     } catch (error) {
       setIsSubmitting(false);
       console.error('Erro ao enviar formulário:', error);
+      
+      // Exibe uma mensagem de erro mais específica para o usuário
+      alert('Ocorreu um erro ao enviar seus dados. Por favor, tente novamente.');
     }
   };
 
